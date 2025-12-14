@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ object.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <h2>{{ object.title }}</h2>
+
+    <p>{{ object.description }}</p>
+    <p>Status: {{ object.status }}</p>
+    <p>Due Date: {{ object.due_date }}</p>
+    <p>Created By: {{ object.created_by.username }}</p>
+
+    <p>
+        <a href="{% url 'task_update' object.pk %}">Edit</a> |
+        <a href="{% url 'task_delete' object.pk %}">Delete</a> |
+        <a href="{% url 'task_list' %}">Back to Tasks</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+    <p>
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+</body>
+</html>

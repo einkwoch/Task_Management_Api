@@ -1,0 +1,113 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif; /* Font Family */
+    line-height: 1.6; /* Line height for readability */
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark text color */
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background: #35424a; /* Dark gray header */
+    color: #ffffff; /* White text */
+    padding: 20px 0; /* Padding for header */
+    text-align: center; /* Center align text */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+}
+
+nav ul li {
+    display: inline; /* Display links inline */
+    margin: 0 15px; /* Space between links */
+}
+
+nav ul li a {
+    color: #ffffff; /* White link color */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Bold text */
+}
+
+nav ul li a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Main Content Styles */
+main {
+    background: #ffffff; /* White background for main content */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle drop shadow */
+    margin-top: 20px; /* Spacing above main content */
+}
+
+/* Task List Styles */
+ul {
+    list-style-type: none; /* Remove bullets for task list */
+}
+
+li {
+    padding: 10px;
+    border: 1px solid #e2e2e2; /* Light gray border for tasks */
+    margin-bottom: 10px; /* Space between tasks */
+    border-radius: 4px;
+    background: #f9f9f9; /* Light background for tasks */
+    transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+li:hover {
+    background-color: #e5e5e5; /* Darken background on hover */
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form input[type="datetime-local"],
+form select,
+form textarea {
+    width: 100%; /* Full-width for inputs */
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 10px; /* Space below inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+form button {
+    background: #35424a; /* Dark button background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove default border */
+    padding: 10px 15px; /* Button padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background 0.3s; /* Smooth transition for hover */
+}
+
+form button:hover {
+    background: #457b9d; /* Change background on hover */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center; /* Center align footer */
+    margin-top: 20px; /* Space above footer */
+    color: #777; /* Lighter text color */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 600px) {
+    nav ul li {
+        display: block; /* Stack links on smaller screens */
+        margin: 5px 0; /* Space between links */
+    }
+}

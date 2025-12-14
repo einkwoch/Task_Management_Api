@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Task</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <h2>Delete Task: {{ object.title }}?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>
+
+    <p>
+        <a href="{% url 'task_list' %}">Cancel</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+
+</body>
+</html>
