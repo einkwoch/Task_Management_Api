@@ -5,12 +5,14 @@ from django.contrib.auth import views as auth_views
 from tasks import views  # Change `your_app` to your actual app name
 from rest_framework.routers import DefaultRouter
 from .views import TaskViewSet
+from django.shortcuts import redirect
 
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet)
 
 
 urlpatterns = [
+    path('', lambda request: redirect('login')),
     path('tasks/', views.TaskListView.as_view(), name='task_list'),
     path('task/create/', views.TaskCreateView.as_view(), name='task_create'),
     path('task/<int:pk>/', views.TaskDetailView.as_view(), name='task_detail'),
