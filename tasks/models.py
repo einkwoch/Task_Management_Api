@@ -68,3 +68,13 @@ class Task(models.Model):
     def clean(self):
         if self.due_date <= timezone.now():
             raise ValidationError("Due date must be in the future.")
+        
+    def mark_as_completed(self):
+        self.status = 'Completed'
+        self.completed_at = timezone.now()  # Set the completed_at timestamp
+        self.save()
+
+    def mark_as_pending(self):
+        self.status = 'Pending'
+        self.completed_at = None  # Reset timestamp
+        self.save()

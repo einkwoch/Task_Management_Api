@@ -1,14 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ object.title }}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     <h2>{{ object.title }}</h2>
 
     <p>{{ object.description }}</p>
@@ -16,14 +24,51 @@
     <p>Due Date: {{ object.due_date }}</p>
     <p>Created By: {{ object.created_by.username }}</p>
 
+    <!-- Add the Mark as Complete/Incomplete button -->
     <p>
-        <a href="{% url 'task_update' object.pk %}">Edit</a> |
-        <a href="{% url 'task_delete' object.pk %}">Delete</a> |
-        <a href="{% url 'task_list' %}">Back to Tasks</a>
-        <a href="{% url 'logout' %}">Logout</a>
+      <button onclick="updateTaskStatus({{ object.pk }})">
+        {% if object.status == 'Completed' %} Mark as Incomplete {% else %} Mark
+        as Complete {% endif %}
+      </button>
     </p>
+
     <p>
-        <a href="{% url 'logout' %}">Logout</a>
+      <a href="{% url 'task_update' object.pk %}">Edit</a> |
+      <a href="{% url 'task_delete' object.pk %}">Delete</a> |
+      <a href="{% url 'task_list' %}">Back to Tasks</a>
+      <a href="{% url 'logout' %}">Logout</a>
     </p>
-</body>
+
+    <p>
+      <a href="{% url 'logout' %}">Logout</a>
+    </p>
+
+    <script>
+      function updateTaskStatus(taskId) {
+        fetch(`/task/${taskId}/status/`, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}", // Include the CSRF token
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Network response was not ok.");
+          })
+          .then((data) => {
+            // Display a success message or redirect
+            window.location.reload(); // Reload the page to reflect changes
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      }
+    </script>
+  </body>
 </html>

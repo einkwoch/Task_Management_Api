@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,15 @@ AUTH_USER_MODEL = 'tasks.CustomUser'
 LOGIN_URL = 'login'               # Redirect to the login page if not authenticated
 LOGIN_REDIRECT_URL = 'task_list'  # Redirect to the task list after login
 LOGOUT_REDIRECT_URL = 'login'      # Redirect to the login page after logout
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'emmanuelizu94@gmail.com'
+EMAIL_HOST_PASSWORD = 'lpss gzrc jxfe zues'
+
+DEFAULT_FROM_EMAIL = 'Task Manager <emmanuelizu94@gmail.com>'
+
+

@@ -11,21 +11,77 @@
 
     <h2>Task List</h2>
 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <p>
         <a href="{% url 'task_create' %}">Create New Task</a>
     </p>
 
+    <!-- 🔍 FILTER & SORT FORM -->
+    <form method="get" style="margin-bottom: 20px;">
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="Pending" {% if request.GET.status == "Pending" %}selected{% endif %}>
+                Pending
+            </option>
+            <option value="Completed" {% if request.GET.status == "Completed" %}selected{% endif %}>
+                Completed
+            </option>
+        </select>
+
+        <select name="priority">
+            <option value="">All Priority</option>
+            <option value="High" {% if request.GET.priority == "High" %}selected{% endif %}>
+                High
+            </option>
+            <option value="Medium" {% if request.GET.priority == "Medium" %}selected{% endif %}>
+                Medium
+            </option>
+            <option value="Low" {% if request.GET.priority == "Low" %}selected{% endif %}>
+                Low
+            </option>
+        </select>
+
+        <input type="date" name="due_date" value="{{ request.GET.due_date }}">
+
+        <select name="sort">
+            <option value="">No Sorting</option>
+            <option value="due_date" {% if request.GET.sort == "due_date" %}selected{% endif %}>
+                Sort by Due Date
+            </option>
+            <option value="priority" {% if request.GET.sort == "priority" %}selected{% endif %}>
+                Sort by Priority
+            </option>
+        </select>
+
+        <button type="submit">Apply</button>
+
+        <!-- Optional reset -->
+        <a href="{% url 'task_list' %}">Reset</a>
+    </form>
+
+    <!-- 📋 TASK LIST -->
     <ul>
         {% for task in object_list %}
             <li>
-                <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a> — {{ task.status }}
+                <a href="{% url 'task_detail' task.pk %}">
+                    {{ task.title }}
+                </a>
+                — {{ task.status }} | {{ task.priority }} | {{ task.due_date|date:"Y-m-d" }}
+
                 <a href="{% url 'task_update' task.pk %}">Edit</a>
                 <a href="{% url 'task_delete' task.pk %}">Delete</a>
             </li>
+        {% empty %}
+            <li>No tasks found.</li>
         {% endfor %}
     </ul>
-    <p>
-        <a href="{% url 'logout' %}">Logout</a>
-    </p>
+
 </body>
 </html>
