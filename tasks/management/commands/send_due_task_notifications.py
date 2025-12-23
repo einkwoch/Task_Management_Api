@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import timedelta
 from tasks.models import Task
+from django.conf import settings
 
 class Command(BaseCommand):
     help = 'Send email reminders for tasks due soon'
@@ -19,11 +20,14 @@ class Command(BaseCommand):
                 send_mail(
                     subject='⏰ Task Due Soon',
                     message=(
-                        f'Hello {task.created_by.username},\n\n'
-                        f'Your task "{task.title}" is due on {task.due_date}.\n\n'
-                        'Please take action.'
+                        f"Hello {task.created_by.username},\n\n"
+                        f"Your task:\n"
+                        f"Title: {task.title}\n"
+                        f"Description: {task.description}\n"
+                        f"Due Date: {task.due_date.strftime('%Y-%m-%d %H:%M')}\n\n"
+                        "Please take action before the deadline."
                     ),
-                    from_email=None,
+                    from_email= settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[task.created_by.email],
                 )
 

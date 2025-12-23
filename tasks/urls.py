@@ -23,5 +23,5 @@ urlpatterns = [
     path('task/<int:pk>/status/', views.TaskStatusUpdateView.as_view(), name='task_status_update'),
     path('permission-denied/', views.custom_permission_denied_view, name='permission_denied'),
     path('api/', include(router.urls)),
-    path('test-email/', views.test_email, name='test_email'),
+    path('test-email/', views.send_due_task_notifications_view, name='test_email'),
 ]

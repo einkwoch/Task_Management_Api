@@ -191,16 +191,12 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 
 ### View to test Email ###
-from django.core.mail import send_mail
+from django.core.management import call_command
 from django.http import HttpResponse
-import os
+from django.contrib.admin.views.decorators import staff_member_required
 
-def test_email(request):
-    send_mail(
-        "Test Email",
-        "This is a test email from PythonAnywhere web app.",
-        os.environ.get("GMAIL_USER"),
-        ["emmanuelizu94@gmail.com"],
-        fail_silently=False,
-    )
-    return HttpResponse("Email sent!")
+@staff_member_required
+def send_due_task_notifications_view(request):
+    # Call your management command
+    call_command('send_due_task_notifications')
+    return HttpResponse("Task due-soon notifications sent successfully!")
