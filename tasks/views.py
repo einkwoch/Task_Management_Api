@@ -187,3 +187,20 @@ class TaskViewSet(viewsets.ModelViewSet):
         task.mark_as_pending()  # Call your method to mark as pending
         serializer = self.get_serializer(task)
         return Response(serializer.data)
+    
+
+
+### View to test Email ###
+from django.core.mail import send_mail
+from django.http import HttpResponse
+import os
+
+def test_email(request):
+    send_mail(
+        "Test Email",
+        "This is a test email from PythonAnywhere web app.",
+        os.environ.get("GMAIL_USER"),
+        ["emmanuelizu94@gmail.com"],
+        fail_silently=False,
+    )
+    return HttpResponse("Email sent!")
