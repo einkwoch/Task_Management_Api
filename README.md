@@ -43,6 +43,11 @@ Tasks can be sorted by:
 
 ---
 
+### 🔐 API
+- I can POST and GET using API endpoints.
+- example GET	/api/tasks/	- List user tasks 
+
+---
 ### 🔔 Notifications System
 
 #### In-App Notifications
