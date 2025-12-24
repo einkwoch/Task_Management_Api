@@ -1,9 +1,5 @@
 # 🗂️ Task Management Application (Django)
 
-## AUTHORIZATION
-USERNAME - kamsi
-pASSWORD - 12345
-
 A full-featured **Task Management web application** built with **Django**, designed to help users create, manage, filter, and track tasks efficiently.  
 The application includes **authentication, task ownership, filtering, sorting, and automated notifications for upcoming deadlines**.
 
@@ -15,6 +11,8 @@ The application includes **authentication, task ownership, filtering, sorting, a
 - User registration and login
 - Secure session-based authentication
 - Tasks are **user-specific** (each user only sees their own tasks)
+- USERNAME: kamsi
+- PASSWORD: 12345
 
 ---
 
