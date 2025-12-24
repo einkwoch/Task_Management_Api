@@ -67,26 +67,6 @@ Tasks can be sorted by:
 
 ---
 
-## 📂 Project Structure
-
-```
-Task_Management_Api/
-├── tasks/
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── templates/
-│   │   └── tasks/
-│   └── management/
-│       └── commands/
-│           └── send_due_task_notifications.py
-├── static/
-├── manage.py
-└── README.md
-```
-
----
-
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
