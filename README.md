@@ -62,7 +62,8 @@ Tasks can be sorted by:
 - **Frontend:** Django Templates (HTML/CSS)
 - **Database:** SQLite (default)
 - **Authentication:** Django Auth System
-- **Email:** Django Email Backend (Console / SMTP)
+- **Email:** Gmail SMTP (Production) / Console Backend (Development)
+- **Hosting:** PythonAnywhere (optional)
 
 ---
 
@@ -98,7 +99,7 @@ cd Task_Management_Api
 ```bash
 python -m venv venv
 source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate    # Windows
+venv\Scripts\activate     # Windows
 ```
 
 ### 3️⃣ Install Dependencies
@@ -123,14 +124,57 @@ python manage.py runserver
 
 ---
 
-## 📧 Email Notifications
+## 📧 Email Setup (Gmail SMTP)
 
-### Run Reminder Command
+### 🔐 Enable Gmail App Password
+- Enable 2-Step Verification
+- Generate App Password for Mail
+- Use the generated password in Django settings
+
+### ⚙️ Django Email Configuration
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'yourgmail@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-app-password'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+```
+
+---
+
+## ⏰ Automated Email Reminders
+
 ```bash
 python manage.py send_due_task_notifications
 ```
 
-This command sends reminder emails for tasks due within 24 hours.
+---
+
+## ☁️ Deployment on PythonAnywhere
+
+### Environment Variables
+Set on PythonAnywhere dashboard:
+
+```
+EMAIL_HOST_USER=yourgmail@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+```
+
+Update settings.py:
+
+```python
+import os
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+```
+
+### Schedule Task
+```bash
+python /home/yourusername/Task_Management_Api/manage.py send_due_task_notifications
+```
 
 ---
 
@@ -138,13 +182,14 @@ This command sends reminder emails for tasks due within 24 hours.
 - Authentication required for all task actions
 - Users can only access their own tasks
 - Secure password hashing via Django
+- Environment variables for sensitive data
 
 ---
 
 ## 👨‍💻 Author
 
 **Emmanuel Izuchukwu Nkwocha**  
-Senior Controls Engineer | Software Engineer
+Senior Controls Engineer | Software Engineer  
 
 ---
 
